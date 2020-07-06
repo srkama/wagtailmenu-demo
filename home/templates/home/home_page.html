@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+{% load menu_tags %}
+{% load footer_menus %}
+{% block body_class %}template-homepage{% endblock %}
+
+{% block extra_css %}
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333; 
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.subnav {
+  float: left;
+  overflow: hidden;
+}
+
+.subnav .subnavbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .subnav:hover .subnavbtn {
+  background-color: red;
+}
+
+.subnav-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  background-color: red;
+  width: 100%;
+  z-index: 1;
+}
+
+.subnav-content a {
+  float: left;
+  color: white;
+  text-decoration: none;
+}
+
+.subnav-content a:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.subnav:hover .subnav-content {
+  display: block;
+}
+</style>
+
+{% endblock extra_css %}
+
+{% block content %}
+
+
+{% comment %}
+Delete the line below if you're just getting started and want to remove the welcome screen!
+{% endcomment %}
+
+{% main_menu max_levels=1 template="home/main_menu.html" %}
+
+<div style="padding:0 16px; margin-top: 10em">
+    <div style="font-size:3rem;font-weight:bolder">
+        Page:{{page.title}}
+    </div>
+</div>
+
+<div class="row">
+  {% footer_menus as menus %}
+  {% for menu in menus %}
+    <div class="col-md-4 {% if for.counter == 0 %} offset-md-4 {% endif %}">
+      <h4>{{menu.heading}}</h4>
+      {% flat_menu menu.handle template="home/footer_menu.html" %}
+    </div>
+  {% endfor %}
+</div>
+
+
+
+{% endblock content %}
